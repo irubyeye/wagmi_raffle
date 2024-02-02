@@ -3,7 +3,7 @@ import "./globals.css";
 import { Web3Modal } from "@/context/Web3Modal";
 
 export const metadata = {
-  title: "Web3Modal",
+  title: "Raffle game",
   description: "Web3Modal Example",
 };
 

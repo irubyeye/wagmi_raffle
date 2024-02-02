@@ -3,11 +3,14 @@
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 
+import { ManageWeth } from "@/app/components/feeds_and_price/ManageWeth";
+import { TokensFeeds } from "@/app/components/token_oracles/TokensFeeds";
+import { GetCurrency } from "@/app/components/feeds_and_price/GetCurrency";
+
 function App() {
   const account = useAccount();
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
-
   const { open } = useWeb3Modal();
 
   return (
@@ -41,8 +44,18 @@ function App() {
             </>
           )}
         </div>
-        <div className={"pt-5"}>
-          <h2 className={"text-2xl"}>Raffle Game</h2>
+        <hr className={"mt-5 mb-5"} />
+        <div className={""}>
+          <h2 className={"text-2xl text-center"}>Manage contract</h2>
+          <ManageWeth />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+          <TokensFeeds />
+        </div>
+        <hr className={"mt-5 mb-5"} />
+        <div className={""}>
+          <h2 className={"text-2xl text-center"}>Raffle logic</h2>
+          <h3 className={"text-xl mt-3"}>Get currency</h3>
+          <GetCurrency />
         </div>
       </div>
     </>
