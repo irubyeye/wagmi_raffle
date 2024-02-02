@@ -6,6 +6,11 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { ManageWeth } from "@/app/components/feeds_and_price/ManageWeth";
 import { TokensFeeds } from "@/app/components/token_oracles/TokensFeeds";
 import { GetCurrency } from "@/app/components/feeds_and_price/GetCurrency";
+import { AllowanceTransfer } from "@/app/components/allowance_transfer/AllowanceTransfer";
+import { AddLiquidity } from "@/app/components/liquidity/AddLiquidity";
+import { PlayRaffle } from "@/app/components/raffle/PlayRaffle";
+import { EndRaffle } from "@/app/components/raffle/EndRaffle";
+import { VerifyAndTransfer } from "@/app/components/raffle/VerifyAndTransfer";
 
 function App() {
   const account = useAccount();
@@ -54,8 +59,29 @@ function App() {
         <hr className={"mt-5 mb-5"} />
         <div className={""}>
           <h2 className={"text-2xl text-center"}>Raffle logic</h2>
+
           <h3 className={"text-xl mt-3"}>Get currency</h3>
           <GetCurrency />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+
+          <h3 className={"text-xl mt-5"}>Allowance</h3>
+          <AllowanceTransfer />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+
+          <h3 className={"text-xl mt-5"}>Add liquidity</h3>
+          <AddLiquidity />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+
+          <h3 className={"text-xl mt-5"}>Play Raffle</h3>
+          <PlayRaffle />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+
+          <h3 className={"text-xl mt-5"}>End Raffle</h3>
+          <EndRaffle />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+
+          <h3 className={"text-xl mt-5"}>Verify and transfer pot</h3>
+          <VerifyAndTransfer />
         </div>
       </div>
     </>

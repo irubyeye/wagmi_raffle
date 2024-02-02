@@ -6,11 +6,11 @@ export function TokensFeeds() {
   const raffleContractAddress: `0x${string}` =
     "0x7C8cB9888f15fb0D18290b1761bD2c43E72C6994";
 
-  const [address, setAddress] = useState("");
-  const [isAllowed, setIsAllowed] = useState(false);
+  const [address, setAddress] = useState<string>("");
+  const [isAllowed, setIsAllowed] = useState<boolean>(false);
 
-  const [addressFeed, setAddressFeed] = useState("");
-  const [addressToken, setAddressToken] = useState("");
+  const [addressFeed, setAddressFeed] = useState<string>("");
+  const [addressToken, setAddressToken] = useState<string>("");
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
     address: raffleContractAddress,

@@ -33,7 +33,7 @@ export function GetCurrency() {
 
   return (
     <>
-      <div className={"pt-5 space-x-5"}>
+      <div className={"pt-3 space-x-5"}>
         <label>Type token address to get currency</label>
         <input ref={inputRef} type={"text"} placeholder={"0xJd13..."} />
         <button
