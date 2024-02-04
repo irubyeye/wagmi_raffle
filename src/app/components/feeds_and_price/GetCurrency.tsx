@@ -1,6 +1,7 @@
 import { useContractRead } from "wagmi";
 import * as RaffleAbi from "../../../abi/Raffle.json";
 import { FormEvent, useState, useEffect, useRef } from "react";
+import { globalRaffleContractAddress } from "../../../../helper";
 
 interface currencyData {
   data: unknown;
@@ -20,7 +21,7 @@ export function GetCurrency() {
   const [address, setAddress] = useState<string>("");
 
   const { data, isError, isLoading } = useContractRead({
-    address: "0x7C8cB9888f15fb0D18290b1761bD2c43E72C6994",
+    address: globalRaffleContractAddress,
     abi: RaffleAbi.abi,
     functionName: "getCurrencyExt",
     args: [address],

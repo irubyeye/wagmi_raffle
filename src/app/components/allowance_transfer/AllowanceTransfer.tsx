@@ -2,10 +2,8 @@ import abi from "../../../abi/UniswapMaskToken.json";
 import { useContractWrite, usePrepareContractWrite } from "wagmi";
 import { FormEvent, useState } from "react";
 import { parseEther } from "viem";
+import { globalRaffleContractAddress } from "../../../../helper";
 export function AllowanceTransfer() {
-  const raffleTokenAddress: `0x${string}` =
-    "0x7C8cB9888f15fb0D18290b1761bD2c43E72C6994";
-
   const [targetTokenAddress, setTargetTokenAddress] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
 
@@ -41,7 +39,7 @@ export function AllowanceTransfer() {
             onClick={() => {
               write({
                 args: [
-                  raffleTokenAddress,
+                  globalRaffleContractAddress,
                   parseEther(amount.toString(), "wei"),
                 ],
               });

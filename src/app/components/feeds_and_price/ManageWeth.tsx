@@ -1,12 +1,13 @@
 import * as RaffleAbi from "../../../abi/Raffle.json";
 import { useContractWrite, usePrepareContractWrite } from "wagmi";
 import { FormEvent, useState } from "react";
+import { globalRaffleContractAddress } from "../../../../helper";
 
 export function ManageWeth() {
   const [address, setAddress] = useState("");
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: "0x7C8cB9888f15fb0D18290b1761bD2c43E72C6994",
+    address: globalRaffleContractAddress,
     abi: RaffleAbi.abi,
     functionName: "manageWeth",
   });

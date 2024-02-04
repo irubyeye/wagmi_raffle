@@ -11,6 +11,7 @@ import { AddLiquidity } from "@/app/components/liquidity/AddLiquidity";
 import { PlayRaffle } from "@/app/components/raffle/PlayRaffle";
 import { EndRaffle } from "@/app/components/raffle/EndRaffle";
 import { VerifyAndTransfer } from "@/app/components/raffle/VerifyAndTransfer";
+import { ExchangeWeth } from "@/app/components/weth_exchange/ExchangeWeth";
 
 function App() {
   const account = useAccount();
@@ -62,6 +63,10 @@ function App() {
 
           <h3 className={"text-xl mt-3"}>Get currency</h3>
           <GetCurrency />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+
+          <h3 className={"text-xl mt-5"}>WETH exchange</h3>
+          <ExchangeWeth />
           <hr className={"mt-5 mb-5 w-1/2"} />
 
           <h3 className={"text-xl mt-5"}>Allowance</h3>

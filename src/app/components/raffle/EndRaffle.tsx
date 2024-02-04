@@ -2,13 +2,11 @@ import { abi } from "../../../abi/Raffle.json";
 import { useContractWrite, usePrepareContractWrite } from "wagmi";
 import { FormEvent, useState } from "react";
 import { parseEther } from "viem";
+import { globalRaffleContractAddress } from "../../../../helper";
 
 export function EndRaffle() {
-  const raffleContractAdress: `0x${string}` =
-    "0x7C8cB9888f15fb0D18290b1761bD2c43E72C6994";
-
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: raffleContractAdress,
+    address: globalRaffleContractAddress,
     abi,
     functionName: "endRaffle",
   });

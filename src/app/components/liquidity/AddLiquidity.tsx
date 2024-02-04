@@ -2,12 +2,10 @@ import { abi } from "../../../abi/Raffle.json";
 import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
 import { FormEvent, useState } from "react";
 import { parseEther } from "viem";
+import { globalRaffleContractAddress } from "../../../../helper";
 export function AddLiquidity() {
   const wethTokenAddress: `0x${string}` =
-    "0xE67ABDA0D43f7AC8f37876bBF00D1DFadbB93aaa";
-
-  const raffleTokenAddress: `0x${string}` =
-    "0x7C8cB9888f15fb0D18290b1761bD2c43E72C6994";
+    "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9";
 
   const account = useAccount();
   const [amountTokenA, setAmountTokenA] = useState<number>(0);
@@ -15,7 +13,7 @@ export function AddLiquidity() {
   const [targetTokenAddress, setTargetTokenAddress] = useState<string>("");
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: raffleTokenAddress,
+    address: globalRaffleContractAddress,
     abi,
     functionName: "addLiquidity",
   });
