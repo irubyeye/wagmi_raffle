@@ -7,7 +7,7 @@ import { arbitrum, mainnet, sepolia, localhost } from "viem/chains";
 
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = "71bd61a65415874b5df19248b559c73b";
-const ALCHEMY_API_KEY = "c5aIW7l65mbZh-f2StYtt5PnQG2bOIUR";
+
 // 2. Create wagmiConfig
 const metadata = {
   name: "Web3Modal",
