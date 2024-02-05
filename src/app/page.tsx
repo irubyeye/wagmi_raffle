@@ -12,6 +12,7 @@ import { PlayRaffle } from "@/app/components/raffle/PlayRaffle";
 import { EndRaffle } from "@/app/components/raffle/EndRaffle";
 import { VerifyAndTransfer } from "@/app/components/raffle/VerifyAndTransfer";
 import { ExchangeWeth } from "@/app/components/weth_exchange/ExchangeWeth";
+import { Voting } from "@/app/components/voting/Voting";
 
 function App() {
   const account = useAccount();
@@ -87,6 +88,10 @@ function App() {
 
           <h3 className={"text-xl mt-5"}>Verify and transfer pot</h3>
           <VerifyAndTransfer />
+          <hr className={"mt-5 mb-5 w-1/2"} />
+
+          <h3 className={"text-xl mt-5"}>Governance</h3>
+          <Voting />
         </div>
       </div>
     </>

@@ -2,19 +2,12 @@ import abi from "../../../abi/Weth.json";
 import { useAccount, useContractRead, useContractWrite } from "wagmi";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { parseEther } from "viem";
-import * as RaffleAbi from "@/abi/Raffle.json";
 import { parseBigNumber } from "@/utils/parseBigInt";
 
 interface DepositeWithdraw {
   depositeAmount: bigint;
   withdrawAmount: bigint;
   userBalance: string;
-}
-
-interface balanceData {
-  data: unknown;
-  isError: boolean;
-  isLoading: boolean;
 }
 
 export function ExchangeWeth() {
@@ -140,9 +133,17 @@ export function ExchangeWeth() {
             </div>
           )}
         </div>
-        <div className={"space-x-5"}>
-          <div>Your balance is: {parseBigNumber(amount.userBalance)} WETH</div>
-        </div>
+        {(account.address && !isNaN(Number(amount.userBalance)) && (
+          <div className={"space-x-5"}>
+            <div>
+              Your balance is: {parseBigNumber(amount.userBalance)} WETH
+            </div>
+          </div>
+        )) || (
+          <div className={"space-x-5"}>
+            <div>Something went wrong, please reconnect account.</div>
+          </div>
+        )}
       </div>
     </>
   );
