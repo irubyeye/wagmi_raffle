@@ -13,6 +13,7 @@ import { EndRaffle } from "@/app/components/raffle/EndRaffle";
 import { VerifyAndTransfer } from "@/app/components/raffle/VerifyAndTransfer";
 import { ExchangeWeth } from "@/app/components/weth_exchange/ExchangeWeth";
 import { Voting } from "@/app/components/voting/Voting";
+import { CastVote } from "@/app/components/voting/CastVote";
 
 function App() {
   const account = useAccount();
@@ -92,6 +93,7 @@ function App() {
 
           <h3 className={"text-xl mt-5"}>Governance</h3>
           <Voting />
+          <CastVote />
         </div>
       </div>
     </>
