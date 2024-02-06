@@ -46,7 +46,7 @@ export function Voting() {
   );
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
+    address: "0xbEbf55B706046A370198B92990B8A2f9E5e1ebB8",
     abi: governorAbi.abi,
     functionName: "propose",
   });
@@ -56,14 +56,14 @@ export function Voting() {
     isError: proposalStateError,
     isLoading: proposalStateLoading,
   } = useContractRead({
-    address: "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
+    address: "0xbEbf55B706046A370198B92990B8A2f9E5e1ebB8",
     abi: governorAbi.abi,
     functionName: "state",
     args: [proposal.proposalId],
   });
 
   useContractEvent({
-    address: "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
+    address: "0xbEbf55B706046A370198B92990B8A2f9E5e1ebB8",
     abi: governorAbi.abi,
     eventName: "ProposalCreated",
     listener(log) {

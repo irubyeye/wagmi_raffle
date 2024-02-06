@@ -3,7 +3,6 @@ import { useContractWrite } from "wagmi";
 import { keccak256, toHex } from "viem";
 import governorAbi from "@/abi/MyGovernor.json";
 import { globalRaffleContractAddress } from "../../../../helper";
-import { useState } from "react";
 
 export function QueueAndExecute({ props }: { props: Proposal }) {
   const descriptionHash: string = keccak256(toHex(props.description));
@@ -14,7 +13,7 @@ export function QueueAndExecute({ props }: { props: Proposal }) {
     isSuccess: isQueueSuccess,
     write: queueWrite,
   } = useContractWrite({
-    address: "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
+    address: "0xbEbf55B706046A370198B92990B8A2f9E5e1ebB8",
     abi: governorAbi.abi,
     functionName: "queue",
   });
@@ -25,7 +24,7 @@ export function QueueAndExecute({ props }: { props: Proposal }) {
     isSuccess: isExecuteSuccess,
     write: executeWrite,
   } = useContractWrite({
-    address: "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
+    address: "0xbEbf55B706046A370198B92990B8A2f9E5e1ebB8",
     abi: governorAbi.abi,
     functionName: "execute",
   });

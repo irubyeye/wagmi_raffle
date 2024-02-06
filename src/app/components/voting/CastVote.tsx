@@ -11,7 +11,7 @@ export function CastVote({
   const [vote, setVote] = useState<number>(0);
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
+    address: "0xbEbf55B706046A370198B92990B8A2f9E5e1ebB8",
     abi: governorAbi.abi,
     functionName: "castVote",
   });
