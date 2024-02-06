@@ -2,14 +2,18 @@ import { abi } from "../../../abi/Raffle.json";
 import governorAbi from "../../../abi/MyGovernor.json";
 
 import { useContractRead, useContractWrite, useContractEvent } from "wagmi";
-import { ChangeEvent, useMemo, useState } from "react";
-import { encodeFunctionData } from "viem";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { encodeFunctionData, keccak256, toHex } from "viem";
 import { ADDRESS_ZERO, globalRaffleContractAddress } from "../../../../helper";
+import { CastVote } from "@/app/components/voting/CastVote";
+import { QueueAndExecute } from "@/app/components/voting/QueueAndExecute";
+import { MagicButtons } from "@/app/components/magic-buttons/MagicButtons";
 
-interface Proposal {
+export interface Proposal {
   tokenAddress: `0x${string}`;
   dataFeed: string;
   description: string;
+  functionHash: string;
   isAllowed: boolean;
   proposalId: `0x${string}` | undefined;
   proposalState: number;
@@ -32,15 +36,14 @@ export function Voting() {
     dataFeed: ADDRESS_ZERO,
     description: "",
     isAllowed: false,
+    functionHash: "",
     proposalId: undefined,
     proposalState: 0,
   });
 
-  const functionCallManageTokenAndOracle = encodeFunctionData({
-    abi,
-    args: [proposal.tokenAddress, proposal.dataFeed, proposal.isAllowed],
-    functionName: "manageTokenAndOracle",
-  });
+  const [proposalId, setProposalId] = useState<`0x${string}` | undefined>(
+    undefined,
+  );
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
     address: "0x519b05b3655F4b89731B677d64CEcf761f4076f6",
@@ -64,12 +67,12 @@ export function Voting() {
     abi: governorAbi.abi,
     eventName: "ProposalCreated",
     listener(log) {
-      setProposal({ ...proposal, proposalId: log[0].args.proposalId });
-      localStorage.setItem("proposalId", `${proposal.proposalId}`);
+      setProposalId(log[0].args.proposalId);
     },
   });
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>): void {
+    e.preventDefault();
     const { name, value }: { name: string; value: string } = e.target;
 
     setProposal({
@@ -78,9 +81,27 @@ export function Voting() {
     });
   }
 
-  useMemo(async () => {
-    setProposal({ ...proposal, proposalState: proposalStateData as number });
-  }, [proposalStateData]);
+  function handleVoting() {
+    const functionCallManageTokenAndOracle = encodeFunctionData({
+      abi,
+      args: [proposal.tokenAddress, proposal.dataFeed, proposal.isAllowed],
+      functionName: "manageTokenAndOracle",
+    });
+    setProposal({
+      ...proposal,
+      functionHash: functionCallManageTokenAndOracle,
+    });
+    console.log(proposal);
+    console.log(functionCallManageTokenAndOracle);
+    write({
+      args: [
+        [globalRaffleContractAddress],
+        [0],
+        [functionCallManageTokenAndOracle],
+        proposal.description,
+      ],
+    });
+  }
 
   return (
     <>
@@ -99,8 +120,8 @@ export function Voting() {
         <div className={"space-x-5"}>
           <label className={""}>Datafeed to add</label>
           <input
-            name="tokenAddress"
-            id="tokenAddress"
+            name="dataFeed"
+            id="dataFeed"
             onChange={handleInputChange}
             type={"text"}
             placeholder={"0xD4fkj5"}
@@ -145,20 +166,19 @@ export function Voting() {
         <button
           className={"border-2 p-1.5 min-w-28 hover:bg-white hover:text-black"}
           disabled={!write}
-          onClick={() => {
-            write({
-              args: [
-                [globalRaffleContractAddress],
-                [0],
-                [functionCallManageTokenAndOracle],
-                proposal.description,
-              ],
-            });
-          }}
+          onClick={handleVoting}
         >
           Create proposal
         </button>
+
         <h3 className={"text-xl mt-5"}>Vote</h3>
+        <CastVote proposalId={proposalId} />
+
+        <h3 className={"text-xl mt-5"}>Queue and execute</h3>
+        <QueueAndExecute props={proposal} />
+
+        <h3 className={"text-xl mt-5"}>Magic buttons</h3>
+        <MagicButtons />
       </div>
     </>
   );

@@ -1,9 +1,13 @@
 import governorAbi from "../../../abi/MyGovernor.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContractWrite } from "wagmi";
+import { Proposal } from "@/app/components/voting/Voting";
 
-export function CastVote() {
-  const proposalId = localStorage.getItem("proposalId");
+export function CastVote({
+  proposalId,
+}: {
+  proposalId: `0x${string}` | undefined;
+}) {
   const [vote, setVote] = useState<number>(0);
 
   const { data, isLoading, isSuccess, write } = useContractWrite({
@@ -26,16 +30,17 @@ export function CastVote() {
           <option value="1">For</option>
           <option value="2">Abstain</option>
         </select>
+        <button
+          className={"border-2 p-1.5 min-w-28 hover:bg-white hover:text-black"}
+          disabled={!write}
+          onClick={() => {
+            console.log(proposalId, vote);
+            write({ args: [proposalId, vote] });
+          }}
+        >
+          Vote
+        </button>
       </div>
-      <button
-        className={"border-2 p-1.5 min-w-28 hover:bg-white hover:text-black"}
-        disabled={!write}
-        onClick={() => {
-          write({ args: [proposalId, vote] });
-        }}
-      >
-        Create proposal
-      </button>
     </div>
   );
 }

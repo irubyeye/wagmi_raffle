@@ -93,7 +93,6 @@ function App() {
 
           <h3 className={"text-xl mt-5"}>Governance</h3>
           <Voting />
-          <CastVote />
         </div>
       </div>
     </>
